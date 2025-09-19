@@ -1,3 +1,20 @@
+from .base import (
+    AUTH_PASSWORD_VALIDATORS,
+    AUTH_USER_MODEL,
+    BASE_DIR,
+    DEFAULT_AUTO_FIELD,
+    INSTALLED_APPS,
+    LANGUAGE_CODE,
+    MIDDLEWARE,
+    ROOT_URLCONF,
+    STATIC_URL,
+    TEMPLATES,
+    TIME_ZONE,
+    USE_I18N,
+    USE_TZ,
+    WSGI_APPLICATION,
+)
+
 # Test database configuration
 DATABASES = {
     "default": {

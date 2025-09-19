@@ -13,7 +13,7 @@ test:  ## Run all tests
 	cd engine && python -m pytest
 
 test-unit:  ## Run fast unit tests only
-	cd engine && python -m pytest -m unit
+	cd engine && DJANGO_SETTINGS_MODULE=settings.test python -m pytest -m unit
 
 test-integration:  ## Run integration tests
 	cd engine && python -m pytest -m integration
