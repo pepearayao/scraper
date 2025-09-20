@@ -1,0 +1,6 @@
+factory_boy>=3.3.3
+Faker>=37.8.0
+flake8>=7.3.0
+isort>=6.0.1
+pre_commit>=4.3.0
+virtualenv>=20.34.0
