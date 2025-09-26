@@ -1,7 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from ninja.errors import AuthenticationError, HttpError
 from ninja.security import HttpBearer
 from rest_framework_simplejwt.tokens import AccessToken
+
+from .responses import fail
 
 User = get_user_model()
 
@@ -13,4 +16,4 @@ class JWTAuth(HttpBearer):
             user = User.objects.get(id=access["user_id"])
             return user
         except Exception:
-            return None
+            raise AuthenticationError("UNAUTHORIZED")
