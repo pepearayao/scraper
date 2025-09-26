@@ -13,18 +13,18 @@ def global_exception_handler(request, exc):
     """Single global exception handler for all API errors"""
 
     if isinstance(exc, ValidationError):
-        error_response = fail("VALIDATION_ERROR", status=400)
+        error_response = fail("VALIDATION_ERROR")
         return JsonResponse(error_response, status=400)
 
     elif isinstance(exc, (Http404, ObjectDoesNotExist)):
-        error_response = fail("NOT_FOUND", status=404)
+        error_response = fail("NOT_FOUND")
         return JsonResponse(error_response, status=404)
 
     elif isinstance(exc, PermissionDenied):
-        error_response = fail("FORBIDDEN", status=403)
+        error_response = fail("FORBIDDEN")
         return JsonResponse(error_response, status=403)
 
     else:
         # Catch-all for any other exception
-        error_response = fail("INTERNAL_ERROR", status=500)
+        error_response = fail("INTERNAL_ERROR")
         return JsonResponse(error_response, status=500)

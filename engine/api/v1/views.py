@@ -23,7 +23,7 @@ def auth_exception_handler(request, exc):
     from django.http import JsonResponse
 
     # Get our standardized error format as a dict
-    error_response = fail("UNAUTHORIZED", status=401)
+    error_response = fail("UNAUTHORIZED")
     # Convert to JsonResponse because Django middleware expects HttpResponse objects
     return JsonResponse(error_response, status=401)
 

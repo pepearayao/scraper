@@ -28,7 +28,6 @@ def fail(
     code: str,
     message: str = None,
     errors: List[dict] = None,
-    status: int = 400,
     retry_after: int = None,
 ):
     """Return standardized error response as dict (for Django Ninja endpoints)"""
@@ -39,6 +38,5 @@ def fail(
         "message": message or ERROR_CODES[code],
         "code": code,
         "errors": errors or [],
-        "http_status": status,
         "retry_after": retry_after,
     }

@@ -55,7 +55,7 @@ def create_project(request, data: ProjectCreateSchema):
         }
     ]
 
-    return JsonResponse(success(data), status=201)
+    return success(data)
 
 
 @router.get(
@@ -92,4 +92,4 @@ def update_project(request, project_id: UUID, data: ProjectUpdateSchema):
             "created_at": project.created_at,
         }
     ]
-    return JsonResponse(success(data), status=200)
+    return success(data)

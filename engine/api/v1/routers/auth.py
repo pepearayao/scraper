@@ -1,5 +1,8 @@
+import json
+
 from django.contrib.auth import authenticate
 from ninja import Router
+from ninja.errors import HttpError
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from ...responses import fail, success
@@ -16,7 +19,12 @@ router = Router()
 
 @router.post(
     "/token",
-    response={200: TokenSuccessResponse, 400: ErrorResponse, 404: ErrorResponse},
+    response={
+        200: TokenSuccessResponse,
+        401: ErrorResponse,
+        400: ErrorResponse,
+        404: ErrorResponse,
+    },
 )
 def obtain_token(request, data: TokenRequest):
     user = authenticate(email=data.email, password=data.password)
@@ -28,12 +36,17 @@ def obtain_token(request, data: TokenRequest):
         }
         return success(data)
 
-    return fail("INVALID_CREDENTIALS", status=401)
+    raise HttpError(401, json.dumps(fail("INVALID_CREDENTIALS")))
 
 
 @router.post(
     "/refresh",
-    response={200: RefreshSuccessResponse, 400: ErrorResponse, 404: ErrorResponse},
+    response={
+        200: RefreshSuccessResponse,
+        401: ErrorResponse,
+        400: ErrorResponse,
+        404: ErrorResponse,
+    },
 )
 def refresh_token(request, data: RefreshRequest):
     try:
@@ -43,4 +56,4 @@ def refresh_token(request, data: RefreshRequest):
         }
         return success(data)
     except Exception:
-        return fail("INVALID_REFRESH_TOKEN", status=401)
+        raise HttpError(401, json.dumps(fail("INVALID_REFRESH_TOKEN")))
